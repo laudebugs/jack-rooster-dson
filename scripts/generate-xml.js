@@ -45,7 +45,7 @@ const generateXmlDoc = (episodesMetadata) => `<?xml version="1.0" encoding="utf-
 const appendEpisodes = (episodesMetadata) => {
     return Object.entries(episodesMetadata)
         .map(
-            ([episode, metadata]) => `        <item>
+            ([episode, metadata], i) => `        <item>
             <title>${encodeXml(metadata.title)}</title>
             <link>${constants.mixcloudBaseUrl + episode}</link>
             <description>${encodeXml(metadata.description)}</description>
@@ -61,7 +61,7 @@ const appendEpisodes = (episodesMetadata) => {
             <media:description type="plain">${encodeXml(metadata.description)}</media:description>
             <media:thumbnail height="600" url="${metadata.coverImage}" width="600" />
             <guid isPermaLink="false">${metadata.guid}</guid>
-            <pubDate>${new Date().toUTCString()}</pubDate>
+            <pubDate>${new Date(Date.now() - 1000 * 60 * i).toUTCString()}</pubDate>
             <content:encoded><![CDATA[<p>${encodeXml(metadata.description)}</p></p>]]></content:encoded>
             <itunes:duration>${metadata.length}</itunes:duration>
             <itunes:episodeType>full</itunes:episodeType>
