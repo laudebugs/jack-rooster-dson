@@ -60,6 +60,7 @@ const appendEpisodes = (episodesMetadata) => {
             <media:content type="audio/mpeg" url="${metadata.source}" />
             <media:description type="plain">${encodeXml(metadata.description)}</media:description>
             <media:thumbnail height="600" url="${metadata.coverImage}" width="600" />
+            <guid isPermaLink="false">${metadata.guid}</guid>
             <content:encoded><![CDATA[<p>${encodeXml(metadata.description)}</p></p>]]></content:encoded>
             <itunes:duration>${metadata.length}</itunes:duration>
             <itunes:episodeType>full</itunes:episodeType>

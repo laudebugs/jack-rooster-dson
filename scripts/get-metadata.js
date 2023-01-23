@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const fs = require('fs')
+const uuid = require('uuid').v4
 
 const downloadUrls = require('../data/download-urls.json')
 const constants = require('./constants.json')
@@ -46,6 +46,7 @@ const metadata = {}
                 coverImage,
                 length,
                 source: downloadUrls[episodeSuffix],
+                guid: uuid()
             }
         } catch (error) {
             console.error(`An error occurred while fetching ${episodeSuffix}: ${error.message}`)
