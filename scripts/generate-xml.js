@@ -28,14 +28,14 @@ const generateXmlDoc = (episodesMetadata) => `<?xml version="1.0" encoding="utf-
         </itunes:category>
         <itunes:category text="Afrohouse" />
         <itunes:category text="Dance" />
-        <copyright>© WNYC</copyright>
-        <itunes:image href="https://media.wnyc.org/i/1400/1400/l/80/2022/05/Radiolab-branded-logo-1400x1400.png" />
+        <copyright>© Jack Rooster</copyright>
+        <itunes:image href="https://raw.githubusercontent.com/laudebugs/jack-rooster/main/dson.jpeg" />
         <itunes:keywords>Afrohouse,Dance,House,Africa,Nairobi</itunes:keywords>
         <itunes:summary>Caffè Mocha is a dose of House music.Featuring guest DJs,Artists and Producers from Africa. Deeper Sounds of Nairobi is a promotional radio show recorded and produced in various corners of the world. These two shows are committed to showcasing musical talent coming out of Africa in the House/Dance Genre.
         </itunes:summary>
         <itunes:subtitle>Deeper Sounds of Nairobi</itunes:subtitle>
         <itunes:owner>
-            <itunes:email>wnycdigital@gmail.com</itunes:email>
+            <itunes:email>jack-rooster@outlook.com</itunes:email>
             <itunes:name>Jack Rooster</itunes:name>
         </itunes:owner>
     </channel>
@@ -46,9 +46,9 @@ const appendEpisodes = (episodesMetadata) => {
     return Object.entries(episodesMetadata)
         .map(
             ([episode, metadata]) => `        <item>
-            <title>${metadata.title}</title>
+            <title>${encodeXml(metadata.title)}</title>
             <link>${constants.mixcloudBaseUrl + episode}</link>
-            <description>${metadata.description}</description>
+            <description>${encodeXml(metadata.description)}</description>
             <enclosure type="audio/mpeg" url="${metadata.source}" />
             <category>afrohouse</category>
             <category>house</category>
@@ -58,20 +58,27 @@ const appendEpisodes = (episodesMetadata) => {
             <category>jack_rooster</category>
             <category>dson</category>
             <media:content type="audio/mpeg" url="${metadata.source}" />
-            <media:description type="plain">${metadata.description}</media:description>
+            <media:description type="plain">${encodeXml(metadata.description)}</media:description>
             <media:thumbnail height="600" url="${metadata.coverImage}" width="600" />
+            <content:encoded><![CDATA[<p>${encodeXml(metadata.description)}</p></p>]]></content:encoded>
             <itunes:duration>${metadata.length}</itunes:duration>
-            <content:encoded><![CDATA[<p>${episode.description}</p>]]></itunes:summary>
             <itunes:episodeType>full</itunes:episodeType>
-            <author>wnycdigital@gmail.com (WNYC Studios)</author>
+            <author>Jack Rooster(DSON)</author>
             <itunes:explicit>no</itunes:explicit>
-            <itunes:subtitle>${metadata.description}</itunes:subtitle>
+            <itunes:subtitle>${encodeXml(metadata.description)}</itunes:subtitle>
             <itunes:author>Jack Rooster</itunes:author>
             <itunes:keywords>House,AfroHouse,Nairobi,Music,Dance,Afrobeats</itunes:keywords>
         </item>`,
         )
         .join('\n')
 }
+const encodeXml = (text) =>
+    text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;')
 const xmlDoc = generateXmlDoc(metadata)
 
-fs.writeFileSync('./data/dson.xml', xmlDoc)
+fs.writeFileSync('./public/dson.xml', xmlDoc)

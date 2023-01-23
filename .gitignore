@@ -3,3 +3,4 @@ data/audio/*.mp3
 initialize.sh
 **/*.DS_Store
 radiolab.xml
+dist
