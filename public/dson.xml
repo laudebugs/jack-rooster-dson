@@ -9,7 +9,7 @@
         <description>Deeper Sounds of Nairobi is a dose of House music.Featuring guest DJs, Artists and Producers from Africa. Deeper Sounds of Nairobi is a promotional radio show recorded and produced in various corners of the world. These two shows are committed to showcasing musical talent coming out of Africa in the House/Dance Genre.</description>
         <atom:link href="https://www.mixcloud.com/jackrooster/" rel="self" />
         <language>en-us</language>
-        <lastBuildDate>Mon, 23 Jan 2023 22:28:28 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 23 Jan 2023 22:39:19 GMT</lastBuildDate>
         <ttl>600</ttl>
         <itunes:explicit>no</itunes:explicit>
         <itunes:author>Jack Rooster</itunes:author>
@@ -24,18 +24,17 @@
         </itunes:category>
         <itunes:category text="Afrohouse" />
         <itunes:category text="Dance" />
-        <copyright>© WNYC</copyright>
-        <itunes:image href="https://media.wnyc.org/i/1400/1400/l/80/2022/05/Radiolab-branded-logo-1400x1400.png" />
+        <copyright>© Jack Rooster</copyright>
+        <itunes:image href="https://raw.githubusercontent.com/laudebugs/jack-rooster/main/dson.jpeg" />
         <itunes:keywords>Afrohouse,Dance,House,Africa,Nairobi</itunes:keywords>
         <itunes:summary>Caffè Mocha is a dose of House music.Featuring guest DJs,Artists and Producers from Africa. Deeper Sounds of Nairobi is a promotional radio show recorded and produced in various corners of the world. These two shows are committed to showcasing musical talent coming out of Africa in the House/Dance Genre.
         </itunes:summary>
         <itunes:subtitle>Deeper Sounds of Nairobi</itunes:subtitle>
         <itunes:owner>
-            <itunes:email>wnycdigital@gmail.com</itunes:email>
+            <itunes:email>jack-rooster@outlook.com</itunes:email>
             <itunes:name>Jack Rooster</itunes:name>
         </itunes:owner>
-    </channel>
-        <item>
+                <item>
             <title>Deeper Sounds Of Nairobi #050 - Venice, Italy</title>
             <link>undefineddeeper-sounds-of-nairobi-050-venice-italy</link>
             <description>We travel to the beautiful city of Venice that is situated across a group of 118 small islands that are separated by canals.</description>
@@ -3539,4 +3538,5 @@ Subscribe On iTunes: http://bit.ly/Anuy84
             <itunes:author>Jack Rooster</itunes:author>
             <itunes:keywords>House,AfroHouse,Nairobi,Music,Dance,Afrobeats</itunes:keywords>
         </item>
+    </channel>
 </rss>

@@ -38,8 +38,8 @@ const generateXmlDoc = (episodesMetadata) => `<?xml version="1.0" encoding="utf-
             <itunes:email>jack-rooster@outlook.com</itunes:email>
             <itunes:name>Jack Rooster</itunes:name>
         </itunes:owner>
+        ${appendEpisodes(episodesMetadata)}
     </channel>
-${appendEpisodes(episodesMetadata)}
 </rss>`
 
 const appendEpisodes = (episodesMetadata) => {
