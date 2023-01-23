@@ -18,7 +18,7 @@ const generateXmlDoc = (episodesMetadata) => `<?xml version="1.0" encoding="utf-
         <itunes:explicit>no</itunes:explicit>
         <itunes:author>Jack Rooster</itunes:author>
         <image>
-            <url>https://raw.githubusercontent.com/laudebugs/jack-rooster/main/dson.jpeg</url>
+            <url>https://raw.githubusercontent.com/laudebugs/jack-rooster/main/assets/dson.jpeg</url>
             <title>Deeper Sounds of Nairobi</title>
             <link>https://www.mixcloud.com/jackrooster/</link>
         </image>
@@ -29,7 +29,7 @@ const generateXmlDoc = (episodesMetadata) => `<?xml version="1.0" encoding="utf-
         <itunes:category text="Afrohouse" />
         <itunes:category text="Dance" />
         <copyright>© Jack Rooster</copyright>
-        <itunes:image href="https://raw.githubusercontent.com/laudebugs/jack-rooster/main/dson.jpeg" />
+        <itunes:image href="https://raw.githubusercontent.com/laudebugs/jack-rooster/main/assets/dson.jpeg" />
         <itunes:keywords>Afrohouse,Dance,House,Africa,Nairobi</itunes:keywords>
         <itunes:summary>Caffè Mocha is a dose of House music.Featuring guest DJs,Artists and Producers from Africa. Deeper Sounds of Nairobi is a promotional radio show recorded and produced in various corners of the world. These two shows are committed to showcasing musical talent coming out of Africa in the House/Dance Genre.
         </itunes:summary>

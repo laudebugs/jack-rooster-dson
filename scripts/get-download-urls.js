@@ -1,9 +1,11 @@
 const puppeteer = require('puppeteer')
+
 const urls = require('../data/mixcloud.json');
 const { writeToJsonFile } = require('./utils');
 
 const downloadUrls = {}
-;(async () => {
+
+async function getDownloadUrls() {
     const browser = await puppeteer.launch()
     let i = 1
     for (let url of urls) {
@@ -38,4 +40,6 @@ const downloadUrls = {}
     writeToJsonFile('download-urls.json', downloadUrls)
 
     await browser.close()
-})()
+}
+
+getDownloadUrls()

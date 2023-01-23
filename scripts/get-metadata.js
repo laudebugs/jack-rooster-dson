@@ -7,7 +7,7 @@ const { writeToJsonFile } = require('./utils')
 
 const metadata = {}
 
-;(async () => {
+async function getMetadata () {
     const browser = await puppeteer.launch()
     const episodesUrlSuffixes = Object.keys(downloadUrls)
     for await (const episodeSuffix of episodesUrlSuffixes) {
@@ -19,16 +19,7 @@ const metadata = {}
             await page.goto(episodeUrl, {
                 waitUntil: 'networkidle0',
             })
-            // const doc = parser.parseFromString(html, "text/html");
-            // const head = doc.window.document.querySelector("head");
-            /**
-            - title
-            - link
-            - description
-            - pubDate
-            - enclosure/link to audio file
-            - thumbnail
-            */
+
             const title = await page
                 .$eval('meta[property="og:title"]', (el) => el.getAttribute('content'))
                 .catch(() => page.$eval('title', (el) => el.innerText))
@@ -56,4 +47,6 @@ const metadata = {}
     writeToJsonFile('metadata', metadata)
 
     await browser.close()
-})()
+}
+
+getMetadata()
