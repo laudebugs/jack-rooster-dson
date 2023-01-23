@@ -1,23 +1,58 @@
-const jsdom = require("jsdom");
+const puppeteer = require('puppeteer')
+const fs = require('fs')
 
-const mixcloudUrls = require('../data/mixcloud-urls.json')
+const downloadUrls = require('../data/download-urls.json')
+const constants = require('./constants.json')
+const { writeToJsonFile } = require('./utils')
 
-async function getHead(urls) {
-    for await (const url of urls) {
-      try {
-        const response = await fetch(url);
-        const html = await response.text();
-        const doc = new jsdom.JSDOM(html);
-        // const doc = parser.parseFromString(html, "text/html");
-        // const head = doc.window.document.querySelector("head");
-        const title = doc.window.document.querySelector("title").textContent
-        console.log(title);
-      } catch (error) {
-        console.error(`An error occurred while fetching ${url}: ${error}`);
-      }
+const metadata = {}
+
+;(async () => {
+    const browser = await puppeteer.launch()
+    const episodesUrlSuffixes = Object.keys(downloadUrls)
+    for await (const episodeSuffix of episodesUrlSuffixes) {
+        try {
+            const page = await browser.newPage()
+
+            // navigate to URL
+            const episodeUrl = constants.mixcloundBaseUrl + episodeSuffix
+            await page.goto(episodeUrl, {
+                waitUntil: 'networkidle0',
+            })
+            // const doc = parser.parseFromString(html, "text/html");
+            // const head = doc.window.document.querySelector("head");
+            /**
+            - title
+            - link
+            - description
+            - pubDate
+            - enclosure/link to audio file
+            - thumbnail
+            */
+            const title = await page
+                .$eval('meta[property="og:title"]', (el) => el.getAttribute('content'))
+                .catch(() => page.$eval('title', (el) => el.innerText))
+            const description = await page
+                .$eval('meta[property="og:description"]', (el) => el.getAttribute('content'))
+                .catch(() => '')
+            const coverImage = await page
+                .$eval('meta[name="twitter:image"]', (el) => el.getAttribute('content'))
+                .catch(() => constants.coverImage)
+            const length = await page
+                .$eval(".total-time", (el)=>el.innerText)
+            metadata[episodeSuffix] = {
+                title,
+                description,
+                coverImage,
+                length,
+                source: downloadUrls[episodeSuffix],
+            }
+        } catch (error) {
+            console.error(`An error occurred while fetching ${episodeSuffix}: ${error.message}`)
+        }
     }
-  }
 
+    writeToJsonFile('metadata', metadata)
 
-getHead(mixcloudUrls)
-  
+    await browser.close()
+})()

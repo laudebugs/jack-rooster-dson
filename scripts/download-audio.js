@@ -20,7 +20,7 @@ const downloadFiles = async (fileList) => {
   }
 };
 
-fs.readFile("./data/download-urls-obj.json", "utf8", (err, data) => {
+fs.readFile("../data/download-urls.json", "utf8", (err, data) => {
   if (err) throw err;
   const fileList = JSON.parse(data);
   downloadFiles(fileList);

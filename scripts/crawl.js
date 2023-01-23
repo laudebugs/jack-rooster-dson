@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer')
-const urls = require('../data/mixcloud.json')
+const urls = require('../data/mixcloud.json');
+const { writeToJsonFile } = require('./utils');
 
-const dls = []
-const dlsObj = {}
+const downloadUrls = {}
 ;(async () => {
     const browser = await puppeteer.launch()
     let i = 1
@@ -24,9 +24,8 @@ const dlsObj = {}
             const href = await page.evaluate((el) => el.getAttribute('href'), downloadButton)
 
             // add href to dls array
-            dls.push(href)
             let slug = url.split('/').filter(url=> url.length>0).pop()
-            dlsObj[decodeURIComponent(slug)] = href
+            downloadUrls[decodeURIComponent(slug)] = href
             console.log(`success parsing ${i} of ${urls.length}`)
         } catch (e) {
             console.log(`failed parsing ${i} of ${urls.length}`)
@@ -36,8 +35,7 @@ const dlsObj = {}
         }
     }
 
-    require('fs').writeFileSync('./data/download-urls.json', JSON.stringify(dls, null, 4))
-    require('fs').writeFileSync('./data/download-urls-obj.json', JSON.stringify(dlsObj, null, 4))
+    writeToJsonFile('download-urls.json', downloadUrls)
 
     await browser.close()
 })()
