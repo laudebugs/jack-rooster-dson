@@ -12,7 +12,7 @@ const download = (url, fileName) =>
 const downloadFiles = async (fileList) => {
   for (let fileName in fileList) {
     try {
-      await download(fileList[fileName], `../data/audio/${fileName}.mp3`);
+      await download(fileList[fileName], `./data/audio/${fileName}.mp3`);
       console.log(`Successfully downloaded ${fileName}`);
     } catch (error) {
       console.error(`Error downloading ${fileName}: ${error}`);
@@ -20,7 +20,7 @@ const downloadFiles = async (fileList) => {
   }
 };
 
-fs.readFile("../data/download-urls-obj.json", "utf8", (err, data) => {
+fs.readFile("./data/download-urls-obj.json", "utf8", (err, data) => {
   if (err) throw err;
   const fileList = JSON.parse(data);
   downloadFiles(fileList);

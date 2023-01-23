@@ -25,7 +25,7 @@ const dlsObj = {}
 
             // add href to dls array
             dls.push(href)
-            let slug = url.split('/').pop()
+            let slug = url.split('/').filter(url=> url.length>0).pop()
             dlsObj[decodeURIComponent(slug)] = href
             console.log(`success parsing ${i} of ${urls.length}`)
         } catch (e) {
@@ -36,8 +36,8 @@ const dlsObj = {}
         }
     }
 
-    require('fs').writeFileSync('../data/download-urls.json', JSON.stringify(dls, null, 4))
-    require('fs').writeFileSync('../data/download-urls-obj.json', JSON.stringify(dlsObj, null, 4))
+    require('fs').writeFileSync('./data/download-urls.json', JSON.stringify(dls, null, 4))
+    require('fs').writeFileSync('./data/download-urls-obj.json', JSON.stringify(dlsObj, null, 4))
 
     await browser.close()
 })()
