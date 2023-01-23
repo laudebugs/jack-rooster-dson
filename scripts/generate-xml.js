@@ -61,6 +61,7 @@ const appendEpisodes = (episodesMetadata) => {
             <media:description type="plain">${encodeXml(metadata.description)}</media:description>
             <media:thumbnail height="600" url="${metadata.coverImage}" width="600" />
             <guid isPermaLink="false">${metadata.guid}</guid>
+            <pubDate>${new Date().toUTCString()}</pubDate>
             <content:encoded><![CDATA[<p>${encodeXml(metadata.description)}</p></p>]]></content:encoded>
             <itunes:duration>${metadata.length}</itunes:duration>
             <itunes:episodeType>full</itunes:episodeType>
